@@ -5,13 +5,13 @@ Característica: Reportar problemas de la comunidad
   quiero reportar problemas de la comunidad
   para dar a conocer los problemas que existen
 
-  Esquema del escenario: Reportar problema de tipo fallas en obras públicas
+  Esquema del escenario: Reportar problema
     Dado que el ciudadano identifica un problema existente en una ubicación
     Y el ciudadano identifica el tipo de problema como "<tipo_problema>"
     Y la descripción del problema es "<descripcion_problema>" en máximo 30 palabras
     Y la ubicación del problema es "<ubicacion_problema>" tanto en tiempo real como seleccionando la ubicación
     Cuando el ciudadano reporte el problema
-    Entonces se dará aviso a las autoridades para que se solucione el problema
+    Entonces se dará aviso a las instituciones públicas para que se solucione el problema
     Ejemplos: Reportes de problemas
       | tipo_problema | descripcion_problema               | ubicacion_problema   |
       | fallas        | Falla en la tubería                | -0.229850, -78.524949|
