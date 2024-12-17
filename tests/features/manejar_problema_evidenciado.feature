@@ -8,7 +8,7 @@ Característica: Manejar problemática evidenciada en la ciudad
   Escenario: Reporte ciudadano notificado
     Dado que se reporta un problema de tipo "<tipo_problema>"
     Y la entidad pública competente para tratar el problema es "<entidad_publica>"
-    Cuando este problema haya sido reportado "<veces_reportadas>" veces
+    Cuando este problema haya sido reportado "<veces_reportadas>" veces Y para tratar el problema este debe ser reportado como mínimo "<numero_minimo_de_reporte_para_consideracion>"
     Entonces se le asignará al equipo técnico una cita para evaluar la problemática
 
     Ejemplos:
