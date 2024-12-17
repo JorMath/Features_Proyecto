@@ -19,3 +19,5 @@ Característica: Manejar problemática evidenciada en la ciudad
     |alcantarillado | EMMAPS          | 7                |
     |electrico      | EEQ             | 1                |
     |baches         | EPMMOP          | 1                |
+
+Escenario: evolución del estado del reporte del ciudadano 
