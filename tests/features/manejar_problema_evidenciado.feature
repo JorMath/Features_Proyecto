@@ -5,8 +5,8 @@ Característica: Manejar problemática evidenciada en la ciudad
   Quiero solucionar los problemas existentes que competen a mi cargo en la ciudad
   Para cumplir con mi labor pública
 
-  Escenario: Problema evidenciado en la ciudad
-    Dado que se reporta un problema "<tipo_problema>"
+  Escenario: Reporte ciudadano notificado
+    Dado que se reporta un problema de tipo "<tipo_problema>"
     Y la entidad pública competente para tratar el problema es "<entidad_publica>"
     Cuando este problema haya sido reportado "<veces_reportadas>" veces
     Entonces se le asignará al equipo técnico una cita para evaluar la problemática
