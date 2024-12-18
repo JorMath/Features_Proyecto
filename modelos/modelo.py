@@ -1,4 +1,4 @@
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 
 
 class Espacio_Publico:
@@ -12,9 +12,40 @@ class Espacio_Publico:
     def existe_actividad(self, actividad):
         return actividad in self.actividades
 
-    def obtener_tiempos_disponibles(self):
-        # Suponiendo que siempre hay un espacio disponible
-        return ["10:00-12:00", "14:00-16:00"]
+    def mostrar_horarios_detallados(self):
+        # Configuración del rango del día
+        horario_inicio = time(8, 0)  # 08:00 AM
+        horario_fin = time(20, 0)  # 08:00 PM
+        intervalo = timedelta(minutes=30)
+
+        # Generar intervalos de tiempo
+        horarios = []
+        actual = datetime.combine(datetime.today(), horario_inicio)
+        fin_dia = datetime.combine(datetime.today(), horario_fin)
+
+        while actual < fin_dia:
+            siguiente = actual + intervalo
+            horarios.append((actual.time(), siguiente.time()))
+            actual = siguiente
+
+        # Verificar actividades para cada intervalo
+        resultado = []
+        for inicio, fin in horarios:
+            actividad_asignada = None
+            for actividad in self.actividades:
+                if (
+                        inicio >= actividad.hora_inicio
+                        and fin <= actividad.hora_fin
+                ):
+                    actividad_asignada = actividad.nombre
+                    break
+
+            if actividad_asignada:
+                resultado.append(f"{inicio.strftime('%H:%M')}-{fin.strftime('%H:%M')} {actividad_asignada}")
+            else:
+                resultado.append(f"{inicio.strftime('%H:%M')}-{fin.strftime('%H:%M')} Libre")
+
+        return resultado
 
     def ocupar_espacio(self, actividad):
         self.actividades.append(actividad)
@@ -35,7 +66,13 @@ class Ciudad:
         self.espacios_publicos.append(espacio)
 
     def existe_espacio_publico_disponible(self):
-        return len(self.espacios_publicos) > 0
+        for espacio in self.espacios_publicos:
+            if len(espacio.mostrar_horarios_detallados()) > 0:  # Verificar horarios disponibles
+                for horario in espacio.mostrar_horarios_detallados():
+                    if "Libre" in horario:
+                        print(f"Espacio público disponible: {espacio.nombre}")
+                        return True
+        return False
 
 
 class Actividad:
