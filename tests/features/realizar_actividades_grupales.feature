@@ -12,17 +12,19 @@ Característica: Realizar actividades grupales
 
   Escenario: Inicio de actividades públicas
     Dado que existen espacios publicos disponibles para reservar
-    Y el aforo maximo de este espacio publico es 30 personas
-    Y existe una franja de tiempo disponible para esa actividad
+    Y el aforo maximo de este espacio publico es "aforo_maximo" personas
+    Y existe una fecha disponible del día "dia_disponible" para esa actividad
+    Y existe una hora disponible "hora_disponible" para esa actividad en ese día
     Cuando un ciudadano inicie una actividad en el espacio publico
     Entonces el espacio publico será ocupado para realizar esa actividad
     Y se publicará la actividad en la agenda de actividades públicas
   # Entonces se notificará la confirmación de la reserva al ciudadano solicitante
   Escenario: Inicio de actividades privadas
     Dado que existen espacios publicos disponibles para reservar
-    Y el aforo maximo de este espacio publico es 30 personas
-    Y existe una franja de tiempo disponible para esa actividad
-    Y se tiene una lista de asistentes a la actividad
+    Y el aforo maximo de este espacio publico es "aforo_maximo" personas
+    Y existe una fecha disponible del día "dia_disponible" para esa actividad
+    Y existe una hora disponible "hora_disponible" para esa actividad en ese día
+    Y se tiene una lista de asistentes "lista_asistentes" a la actividad
     Cuando un ciudadano inicie una actividad en el espacio publico
     Entonces se notificará la actividad a los asistentes de la lista
     Y el espacio publico será ocupado para realizar esa actividad
