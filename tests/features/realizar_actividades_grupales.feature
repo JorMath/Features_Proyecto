@@ -28,4 +28,14 @@ Característica: Realizar actividades grupales
 #      | plaza cultural            | 2024-12-20T09:30:00    | ["sofia@mail.com", "pedro@mail.com"]              |
 #      | explanada deportiva       | 2024-12-21T17:00:00    | ["carlos@mail.com", "laura@mail.com"]             |
 #
-
+  Esquema del escenario: Participar en actividades públicas
+    Dado que existen 3 espacios públicos en la ciudad:
+    |Parque Alameda|
+    |Parque Bicentenario|
+    |Estadio Liga|
+    Y que "*Parque Alameda*" está disponible el día "*Lunes*" de "*15:00*" a "*Lunes*", "*17:00*"
+    Y que "*Parque Bicentenario*" está disponible el día "*Martes*" de "*14:00*" a "*Martes*", "*16:00*"
+    Y que "*Estadio Liga*" está disponible el día "*Miércoles*" de "*15:00*" a "*Miércoles*", "*19:00*"
+    Cuando el ciudadano quiera realizar la actividad en "*Parque Alameda*"
+    Entonces el ciudadano tendrá una reserva de "*Parque Alameda*"
+    Y se publicará la actividad en la agenda de actividades públicas
