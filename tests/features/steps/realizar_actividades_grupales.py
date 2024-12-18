@@ -3,94 +3,67 @@ from behave import *
 use_step_matcher("re")
 
 
-@step('que existe un espacio público disponible en la ciudad')
+@step("que existe por lo menos un espacio público en la ciudad")
 def step_impl(context):
     context.ciudad = Ciudad("Quito")
-    context.espacio_publico1 = Espacio_Publico("Parque La Carolina", True)
-    context.espacio_publico2 = Espacio_Publico("Parque Metropolitano", False)
-    context.espacio_publico3 = Espacio_Publico("Parque Bicentenario", False)
+    context.espacio_publico1 = Espacio_Publico("Parque La Carolina")
+    context.espacio_publico2 = Espacio_Publico("Parque Metropolitano")
+    context.espacio_publico3 = Espacio_Publico("Parque Bicentenario")
     context.ciudad.agregar_espacio_publico(context.espacio_publico1)
     context.ciudad.agregar_espacio_publico(context.espacio_publico2)
     context.ciudad.agregar_espacio_publico(context.espacio_publico3)
     assert context.ciudad.existe_espacio_publico_disponible()
 
-@step('el aforo máximo de este espacio público es "<aforo>" personas')
-def step_impl(context, aforo):
-    try:
-        context.espacio_publico1.set_aforo_maximo(aforo)
-    except ValueError as e:
-        assert False, f"{e}"
 
-
-
-
-@step('existe una fecha disponible del día "<dia>" para esa actividad')
-def step_impl(context, dia):
-    context.espacio_publico1.obtener_dia_disponible()
-    evento1 = Evento()
-    evento2 = Evento()
-    evento3 = Evento()
-    evento1.set_fecha("2024-12-10")
-    evento2.set_fecha("2024-12-11")
-    evento3.set_fecha("2024-12-12")
-    calendario_eventos = Calendario()
-    calendario_eventos.agregar_evento(evento1)
-    calendario_eventos.agregar_evento(evento2)
-    calendario_eventos.agregar_evento(evento3)
-
-
-@step('existe una hora disponible "<hora>" para esa actividad en ese día')
+@step("el espacio público tiene disponibilidad en algún tiempo")
 def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
-    raise NotImplementedError(u'STEP: Y existe una hora disponible "<hora>" para esa actividad en ese día')
+    assert not context.espacio_publico1.obtener_tiempos_disponibles().is_empty()
 
 
-@step('un ciudadano inicie una actividad en el espacio público "<espacio>"')
+@step("el ciudadano inicie una actividad en el espacio público A en un rango de tiempo determinado")
 def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
-    raise NotImplementedError(u'STEP: Cuando un ciudadano inicie una actividad en el espacio público "<espacio>"')
+    context.actividad = Actividad("Fútbol", "Parque La Carolina", "2024-12-10", "2024-12-10", "10:00", "12:00")
+    context.espacio_publico1.agregar_actividad(context.actividad)
+    assert context.espacio_publico1.existe_actividad(context.actividad)
 
 
-@step('se elija la fecha "<día>" y la hora "<hora>" para la actividad')
+@step("el espacio público será ocupado para realizar esa actividad en el tiempo elegida")
 def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
-    raise NotImplementedError(u'STEP: Y se elija la fecha "<día>" y la hora "<hora>" para la actividad')
+    context.espacio_publico1.ocupar_espacio(context.actividad)
+    assert context.espacio_publico1.existe_actividad_en_tiempo(context.actividad.obtener_tiempo())
 
-
-@step('el espacio público será ocupado para realizar esa actividad en el día "<día>" a las "<hora>"')
-def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
-    raise NotImplementedError(
-        u'STEP: Entonces el espacio público será ocupado para realizar esa actividad en el día "<día>" a las "<hora>"')
 
 
 @step("se publicará la actividad en la agenda de actividades públicas")
 def step_impl(context):
+    context.agenda = Agenda()
+    context.agenda.agregar_actividad(context.actividad)
+    assert context.actividad in context.agenda.obtener_actividades()
+
+@step('que existe por lo menos un "(.+)" en la ciudad')
+def step_impl(context, arg0):
     """
     :type context: behave.runner.Context
+    :type arg0: str
     """
-    raise NotImplementedError(u'STEP: Y se publicará la actividad en la agenda de actividades públicas')
+    raise NotImplementedError(u'STEP: Dado que existe por lo menos un "<espacio_público>" en la ciudad')
 
 
-@step('se tiene una lista de asistentes "<asistentes>" a la actividad')
-def step_impl(context):
+@step('el espacio público tiene disponibilidad en algún "(?P<tiempo_disponible>.+)"')
+def step_impl(context, tiempo_disponible):
     """
     :type context: behave.runner.Context
+    :type tiempo_disponible: str
     """
-    raise NotImplementedError(u'STEP: Y se tiene una lista de asistentes "<asistentes>" a la actividad')
+    raise NotImplementedError(u'STEP: Y el espacio público tiene disponibilidad en algún "<tiempo_disponible>"')
 
 
-@step('se notificará la actividad a los asistentes "<asistentes>"')
-def step_impl(context):
+@step(
+    'el ciudadano inicie una actividad privada en el espacio publico "(?P<espacio_eligido>.+)" en un rango de tiempo determinado')
+def step_impl(context, espacio_eligido):
     """
     :type context: behave.runner.Context
+    :type espacio_eligido: str
     """
-    raise NotImplementedError(u'STEP: Y se notificará la actividad a los asistentes "<asistentes>"')
+    raise NotImplementedError(
+        u'STEP: Cuando el ciudadano inicie una actividad privada en el espacio publico "<espacio_eligido>" en un rango de tiempo determinado')
