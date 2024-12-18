@@ -1,6 +1,10 @@
 from behave import *
+from modelos.modelo import Ciudad, Espacio_Publico, Actividad, Agenda
 
 use_step_matcher("re")
+
+
+
 
 
 @step("que existe por lo menos un espacio público en la ciudad")
